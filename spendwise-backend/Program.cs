@@ -1,5 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using spendwise.DataAccess;
+using spendwise.Business.Interfaces;
+using spendwise.Business;
+using spendwise.DataAccess.Repositories;
+using spendwise.DataAccess.Entities;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,6 +19,10 @@ builder.Services.AddDbContext<SpendWiseContext>(options =>
 { 
     options.UseSqlServer(connectionString);
 });
+
+builder.Services.AddTransient<ICategoryService, CategoryService>();
+builder.Services.AddTransient<IRepository<Category>, CategoryRepository>();
+
 
 var app = builder.Build();
 

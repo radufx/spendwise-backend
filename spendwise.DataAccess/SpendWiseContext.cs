@@ -14,6 +14,7 @@ namespace spendwise.DataAccess
 
 		public DbSet<Category> Categories { set; get; }
 		public DbSet<Product> Products { set; get; }
+		public DbSet<CartProduct> CartProducts { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

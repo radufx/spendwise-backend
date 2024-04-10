@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "spendwise-backend", "spendw
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "spendwise.DataAccess", "spendwise.DataAccess\spendwise.DataAccess.csproj", "{7E6FF621-8BBB-4FCF-A2F4-F0D80DDB1BDE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "spendwise.Business", "spendwise.Business\spendwise.Business.csproj", "{F548B8DE-C1E8-46C8-848E-6C051B4D58A6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{7E6FF621-8BBB-4FCF-A2F4-F0D80DDB1BDE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7E6FF621-8BBB-4FCF-A2F4-F0D80DDB1BDE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7E6FF621-8BBB-4FCF-A2F4-F0D80DDB1BDE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F548B8DE-C1E8-46C8-848E-6C051B4D58A6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F548B8DE-C1E8-46C8-848E-6C051B4D58A6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F548B8DE-C1E8-46C8-848E-6C051B4D58A6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F548B8DE-C1E8-46C8-848E-6C051B4D58A6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

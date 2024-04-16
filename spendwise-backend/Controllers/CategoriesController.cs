@@ -1,6 +1,8 @@
 ﻿using System;
 using Microsoft.AspNetCore.Mvc;
 using spendwise.Business.Interfaces;
+using spendwise.DataAccess.Entities;
+using spendwise.DataAccess.Dtos;
 
 namespace spendwise_backend.Controllers
 {
@@ -22,6 +24,49 @@ namespace spendwise_backend.Controllers
 
 			return Ok(categories);
 		}
-	}
+
+		[HttpPost("AddCategory")]
+		public async Task<IActionResult> AddCategory([FromBody]CreateCategoryDto category)
+		{
+			var createdCategory = await _categoryService.CreateCategoryAsync(category);
+
+			return Ok(createdCategory);
+		}
+
+		[HttpGet("{id}/GetCategory")]
+		public async Task<IActionResult> GetCategory([FromRoute] int id)
+		{
+			var category = await _categoryService.FindCategoryByIdAsync(id);
+
+			if (category == null)
+			{
+				return NotFound(id);
+			}
+
+			return Ok(category);
+		}
+
+		[HttpPut("{id}/UpdateCategory")]
+		public async Task <IActionResult> UpdateCategory([FromRoute] int id, [FromBody]UpdateCategoryDto updatedCategory)
+		{
+            var category = await _categoryService.UpdateCategoryAsync(updatedCategory);
+
+            if (category == null)
+            {
+                return NotFound(id);
+            }
+
+            return Ok(category);
+        }
+
+		[HttpGet("{id}/DeleteCategory")]
+		public async Task<IActionResult> DeleteCategory([FromRoute] int id)
+		{
+			// TODO: maybe add error handling for unexisting category
+			await _categoryService.DeleteCategoryAsync(id);
+
+			return Ok();
+		}
+    }
 }
 

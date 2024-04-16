@@ -13,7 +13,7 @@ namespace spendwise.DataAccess.Repositories
             _context = context;
         }
 
-        public virtual async Task DeleteAsync(string id)
+        public virtual async Task DeleteAsync(int id)
         {
             try
             {
@@ -33,7 +33,7 @@ namespace spendwise.DataAccess.Repositories
             }
         }
 
-        public virtual async Task<TEntity?> FindByIdAsync(string id)
+        public virtual async Task<TEntity?> FindByIdAsync(int id)
         {
             try
             {
@@ -75,6 +75,7 @@ namespace spendwise.DataAccess.Repositories
         {
             try
             {
+                //_context.Set<TEntity>().Update(entity);
                 _context.Set<TEntity>().Entry(entity).State = EntityState.Modified;
                 await _context.SaveChangesAsync();
                 return entity;

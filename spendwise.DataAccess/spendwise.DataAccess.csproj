@@ -11,6 +11,7 @@
     <None Remove="Configurations\" />
     <None Remove="Repositories\" />
     <None Remove="Dtos\" />
+    <None Remove="Dtos\UpdateCategoryDto.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Entities\" />

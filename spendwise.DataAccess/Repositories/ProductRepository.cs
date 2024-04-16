@@ -4,18 +4,17 @@ using spendwise.DataAccess.Entities;
 
 namespace spendwise.DataAccess.Repositories
 {
-    public class CategoryRepository : BaseRepository<Category>
-    {
-        public CategoryRepository(SpendWiseContext context) : base(context)
-        {
+	public class ProductRepository : BaseRepository<Product>
+	{
+		public ProductRepository(SpendWiseContext context): base(context)
+		{
+		}
 
-        }
-
-        public override async Task<IEnumerable<Category>> GetAllAsync()
-        {
+		public override async Task<IEnumerable<Product>> GetAllAsync()
+		{
             try
             {
-                return await _context.Categories.Include(c => c.Products).ToListAsync();
+                return await _context.Products.Include(c => c.Categories).ToListAsync();
             }
             catch (Exception ex)
             {
@@ -23,11 +22,11 @@ namespace spendwise.DataAccess.Repositories
             }
         }
 
-        public override async Task<Category?> FindByIdAsync(int id)
+        public override async Task<Product?> FindByIdAsync(int id)
         {
             try
             {
-                return await _context.Categories.Include(c => c.Products).SingleOrDefaultAsync(c => c.Id == id);
+                return await _context.Products.Include(c => c.Categories).SingleOrDefaultAsync(c => c.Id == id);
             }
             catch (Exception ex)
             {

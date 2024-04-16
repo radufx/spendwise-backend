@@ -4,6 +4,7 @@ using spendwise.Business.Interfaces;
 using spendwise.Business;
 using spendwise.DataAccess.Repositories;
 using spendwise.DataAccess.Entities;
+using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,6 +15,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+
 var connectionString = builder.Configuration.GetConnectionString("SpendWiseContext");
 builder.Services.AddDbContext<SpendWiseContext>(options =>
 { 
@@ -22,6 +24,11 @@ builder.Services.AddDbContext<SpendWiseContext>(options =>
 
 builder.Services.AddTransient<ICategoryService, CategoryService>();
 builder.Services.AddTransient<IRepository<Category>, CategoryRepository>();
+
+builder.Services.AddTransient<IProductService, ProductService>();
+builder.Services.AddTransient<IRepository<Product>, ProductRepository>();
+
+
 
 
 var app = builder.Build();

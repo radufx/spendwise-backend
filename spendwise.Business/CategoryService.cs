@@ -15,6 +15,17 @@ namespace spendwise.Business
             _categoriesRepository = categoriesRepository;
 		}
 
+        public async Task<Category> CreateCategoryAsync(CreateCategoryDto category)
+        {
+            var newCategory = new Category
+            {
+                Id = 0,
+                Name = category.Name,
+            };
+
+            return await _categoriesRepository.PostAsync(newCategory);
+        }
+
         public async Task<IEnumerable<CategoryDto>> GetCategoriesAsync()
         {
             var categories = await _categoriesRepository.GetAllAsync();
@@ -32,6 +43,51 @@ namespace spendwise.Business
             }).ToList();
 
             return categoriesDtos;
+        }
+
+        public async Task<CategoryDto?> FindCategoryByIdAsync(int id)
+        {
+            var category = await _categoriesRepository.FindByIdAsync(id);
+
+            if(category == null)
+            {
+                return null;
+            }
+
+            var categoryDto = new CategoryDto
+            {
+                Id = category.Id,
+                Name = category.Name,
+                Products = category.Products.Select(p => new ProductDto
+                {
+                    Id = p.Id,
+                    Name = p.Name
+                })
+            };
+
+            return categoryDto;
+        }
+
+        public async Task<Category?> UpdateCategoryAsync(UpdateCategoryDto category)
+        {
+            var existingCategory = await _categoriesRepository.FindByIdAsync(category.Id);
+            if (existingCategory == null)
+            {
+                return null;
+            }
+
+            var updatedCategory = new Category
+            {
+                Id = category.Id,
+                Name = category.Name
+            };
+
+            return await _categoriesRepository.UpdateAsync(updatedCategory);
+        }
+
+        public async Task DeleteCategoryAsync(int id)
+        {
+            await _categoriesRepository.DeleteAsync(id);
         }
     }
 }

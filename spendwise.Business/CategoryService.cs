@@ -76,13 +76,16 @@ namespace spendwise.Business
                 return null;
             }
 
+            // TODO: create updatecategory DTO only with name
+            //existingCategory.Name = category.Name;
+
             var updatedCategory = new Category
             {
                 Id = category.Id,
                 Name = category.Name
             };
 
-            return await _categoriesRepository.UpdateAsync(updatedCategory);
+            return await _categoriesRepository.UpdateAsync(existingCategory);
         }
 
         public async Task DeleteCategoryAsync(int id)

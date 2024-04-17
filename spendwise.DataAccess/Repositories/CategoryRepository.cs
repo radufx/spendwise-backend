@@ -27,7 +27,7 @@ namespace spendwise.DataAccess.Repositories
         {
             try
             {
-                return await _context.Categories.Include(c => c.Products).SingleOrDefaultAsync(c => c.Id == id);
+                return await _context.Categories.AsNoTracking().Include(c => c.Products).SingleOrDefaultAsync(c => c.Id == id);
             }
             catch (Exception ex)
             {

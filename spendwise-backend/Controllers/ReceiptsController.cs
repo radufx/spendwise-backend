@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using spendwise.Business.Interfaces;
+using spendwise.DataAccess.Dtos;
 using spendwise.DataAccess.Entities;
 
 namespace spendwise_backend.Controllers
@@ -28,9 +29,22 @@ namespace spendwise_backend.Controllers
 				return BadRequest();
 			}
 
-			var imageOcr = await _receiptService.ScanReceipt(categoriesList, image);
+			var categorizedProductsDto = await _receiptService.ScanReceipt(categoriesList, image);
 
-			return Ok(imageOcr);
+			return Ok(categorizedProductsDto);
+		}
+
+		[HttpPost("SaveCart")]
+		public async Task<ActionResult<string>> SaveCart([FromBody] CreateCartDto cart)
+		{
+			if (cart.CategoryProducts.Count() == 0)
+			{
+				return BadRequest();
+			}
+
+			var createdCart = await _receiptService.SaveCart(cart);
+
+			return Ok(createdCart);
 		}
 	}
 }

@@ -29,6 +29,7 @@ builder.Services.AddTransient<IProductService, ProductService>();
 builder.Services.AddTransient<IRepository<Product>, ProductRepository>();
 
 builder.Services.AddTransient<IReceiptService, ReceiptService>();
+builder.Services.AddTransient<IRepository<Cart>, BaseRepository<Cart>>(); 
 
 
 var app = builder.Build();

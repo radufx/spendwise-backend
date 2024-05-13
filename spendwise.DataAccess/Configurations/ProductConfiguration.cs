@@ -19,10 +19,7 @@ namespace spendwise.DataAccess.Configurations
                     e => e.HasOne<Category>().WithMany().HasForeignKey("CategoryId").HasConstraintName("FK_ProductCategory_Category"),
                     e => e.HasOne<Product>().WithMany().HasForeignKey("ProductId").HasConstraintName("FK_ProductCategory_Product"));
 
-            builder.HasMany(p => p.Carts).WithMany(c => c.Products)
-                .UsingEntity<CartProduct>(
-                    c => c.HasOne(e => e.Cart).WithMany(e => e.Items),
-                    p => p.HasOne(e => e.Product).WithMany(e => e.ProductCarts));
+           
         }
     }
 }

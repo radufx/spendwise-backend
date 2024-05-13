@@ -59,7 +59,7 @@ namespace spendwise_backend.Controllers
             return Ok(category);
         }
 
-		[HttpGet("{id}/DeleteCategory")]
+		[HttpDelete("{id}/DeleteCategory")]
 		public async Task<IActionResult> DeleteCategory([FromRoute] int id)
 		{
 			// TODO: maybe add error handling for unexisting category
@@ -67,6 +67,14 @@ namespace spendwise_backend.Controllers
 
 			return Ok();
 		}
+
+		[HttpGet("GetCategoriesTotal")]
+		public async Task<IActionResult> GetCategoriesTotal([FromQuery] DateTime? dateFrom = null, [FromQuery] DateTime? dateTo = null)
+		{
+			var categoriesTotal = await _categoryService.GetCategoriesTotal(dateFrom, dateTo);
+
+			return Ok(categoriesTotal);
+		}	
     }
 }
 

@@ -2,6 +2,7 @@
 using System.Net.Http.Headers;
 using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
+using spendwise.Business.Exceptions;
 using spendwise.Business.Interfaces;
 using spendwise.DataAccess.Dtos;
 using spendwise.DataAccess.Entities;
@@ -68,6 +69,8 @@ namespace spendwise.Business
             foreach(var categoryProducts in createCart.CategoryProducts)
             {
                 var category = await _categoryRepository.FindByIdAsync(categoryProducts.Id);
+
+                if (category == null) throw new NotFoundException($"Entity of type {typeof(Category)} not found");
 
                 cartProducts.AddRange(await AddProducts(category, categoryProducts.Products, existingProducts.ToList()));
             }

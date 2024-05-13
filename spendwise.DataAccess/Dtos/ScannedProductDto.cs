@@ -11,7 +11,7 @@ namespace spendwise.DataAccess.Dtos
 		[JsonProperty("cantitate")]
 		public int Quantity { get; set; }
 		[JsonProperty("pret")]
-		public double Price { get; set; }
+		public float Price { get; set; }
 	}
 }
 

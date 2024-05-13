@@ -8,7 +8,7 @@ namespace spendwise.DataAccess.Entities
 		public Cart Cart { get; set; }
 		public int CartId { get; set; }
 		public int Quantity { get; set; }
-		public double Price { get; set; }
+		public float Price { get; set; }
 	}
 }
 

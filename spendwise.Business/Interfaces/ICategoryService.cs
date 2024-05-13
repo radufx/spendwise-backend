@@ -15,6 +15,8 @@ namespace spendwise.Business.Interfaces
 		Task<Category?> UpdateCategoryAsync(UpdateCategoryDto category);
 
 		Task DeleteCategoryAsync(int id);
+
+		Task<IEnumerable<CategoryTotalPriceDto>> GetCategoriesTotal(DateTime? dateFrom, DateTime? dateTo);
 	}
 }
 

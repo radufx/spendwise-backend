@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using spendwise.Business.Exceptions;
 using spendwise.Business.Interfaces;
 using spendwise.DataAccess.Dtos;
 using spendwise.DataAccess.Entities;
@@ -42,9 +43,22 @@ namespace spendwise_backend.Controllers
 				return BadRequest();
 			}
 
+			try
+			{
 			var createdCart = await _receiptService.SaveCart(cart);
 
-			return Ok(createdCart);
+			}
+			catch(NotFoundException e)
+			{
+				return BadRequest(e.Message);
+			}
+			catch(Exception e)
+			{
+				Console.WriteLine(e);
+				return BadRequest();
+			}
+
+			return Ok();
 		}
 	}
 }

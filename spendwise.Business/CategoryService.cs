@@ -13,6 +13,7 @@ namespace spendwise.Business
 		public CategoryService(IRepository<Category> categoriesRepository)
 		{
             _categoriesRepository = categoriesRepository;
+
 		}
 
         public async Task<Category> CreateCategoryAsync(CreateCategoryDto category)
@@ -91,6 +92,40 @@ namespace spendwise.Business
         public async Task DeleteCategoryAsync(int id)
         {
             await _categoriesRepository.DeleteAsync(id);
+        }
+
+        public async Task<IEnumerable<CategoryTotalPriceDto>> GetCategoriesTotal(DateTime? dateFrom,DateTime? dateTo)
+        {
+            var categories = await _categoriesRepository.GetAllAsync();
+
+            var categoriesTotal = new List<CategoryTotalPriceDto>();
+
+            foreach (var category in categories)
+            {
+                float totalCategory = 0;
+
+                foreach (var product in category.Products)
+                {
+                    totalCategory = product.ProductCarts.Sum(pc => {
+                        if (dateFrom != null && dateTo != null)
+                        {
+                            if (pc.Cart.Date >= dateFrom && pc.Cart.Date <= dateTo) return pc.Price * pc.Quantity;
+                            else return 0;
+                        }
+                        else return pc.Price * pc.Quantity;
+                     });
+                }
+
+
+                categoriesTotal.Add(new CategoryTotalPriceDto
+                {
+                    Id = category.Id,
+                    Name = category.Name,
+                    Total = totalCategory
+                });
+            }
+
+            return categoriesTotal;
         }
     }
 }

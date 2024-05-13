@@ -23,7 +23,10 @@ namespace spendwise.DataAccess
 
 			new CategoryConfiguration().Configure(modelBuilder.Entity<Category>());
 			new ProductConfiguration().Configure(modelBuilder.Entity<Product>());
-        }
+			new CartConfiguration().Configure(modelBuilder.Entity<Cart>());
+			new CartProductConfiguration().Configure(modelBuilder.Entity<CartProduct>());
+
+		}
     }
 }
 
